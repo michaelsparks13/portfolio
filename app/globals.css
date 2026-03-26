@@ -1,0 +1,156 @@
+@import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #141420;
+  --surface-hover: #1a1a2e;
+  --border: rgba(255, 255, 255, 0.08);
+  --text-primary: #e8e8ed;
+  --text-secondary: #8888a0;
+  --accent: #3b82f6;
+  --accent-glow: rgba(59, 130, 246, 0.15);
+  --live: #22c55e;
+  --concept: #a78bfa;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-accent-glow: var(--accent-glow);
+  --color-live: var(--live);
+  --color-concept: var(--concept);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* MapLibre overrides */
+.maplibregl-canvas {
+  outline: none;
+}
+
+/* Pulsing marker */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.marker-pulse {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+
+.marker-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.4;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.marker-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.reveal-stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger > .reveal:nth-child(6) { transition-delay: 400ms; }
+.reveal-stagger > .reveal:nth-child(7) { transition-delay: 480ms; }
+.reveal-stagger > .reveal:nth-child(8) { transition-delay: 560ms; }
+.reveal-stagger > .reveal:nth-child(9) { transition-delay: 640ms; }
+.reveal-stagger > .reveal:nth-child(10) { transition-delay: 720ms; }
+.reveal-stagger > .reveal:nth-child(11) { transition-delay: 800ms; }
+
+/* Chevron bounce */
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.bounce-down {
+  animation: bounce-down 2s ease-in-out infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Grid pattern for concept cards */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Glow effect for live badge */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 4px rgba(34, 197, 94, 0.4); }
+  50% { box-shadow: 0 0 12px rgba(34, 197, 94, 0.6); }
+}
+
+.glow-live {
+  animation: glow 2s ease-in-out infinite;
+}
