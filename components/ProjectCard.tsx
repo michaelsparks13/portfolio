@@ -113,10 +113,18 @@ export default function ProjectCard({
       {/* Visual side */}
       <div className="w-full md:w-1/2 flex-shrink-0">
         <div className="relative rounded-xl overflow-hidden border border-border bg-surface grid-pattern aspect-[16/10] flex items-center justify-center group">
-          {/* Icon */}
-          <div className="text-accent opacity-30 group-hover:opacity-50 transition-opacity duration-500">
-            {iconMap[project.icon] || iconMap["grid"]}
-          </div>
+          {/* Screenshot or Icon */}
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={`${project.title} screenshot`}
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+          ) : (
+            <div className="text-accent opacity-30 group-hover:opacity-50 transition-opacity duration-500">
+              {iconMap[project.icon] || iconMap["grid"]}
+            </div>
+          )}
 
           {/* Category label */}
           <div className="absolute top-4 left-4">

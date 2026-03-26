@@ -11,6 +11,7 @@ export interface Project {
   location: [number, number]; // [lng, lat]
   icon: string;
   category: string;
+  image?: string;
 }
 
 export const projects: Project[] = [
@@ -19,7 +20,8 @@ export const projects: Project[] = [
     title: "AI Weather Model Explorer",
     subtitle: "Compare AI weather models against real-world observations in real time",
     status: "live",
-    liveUrl: "#",
+    liveUrl: "https://weather-model-explorer.vercel.app",
+    image: "/screenshots/weather-explorer.png",
     targetCompanies: ["Jua.ai", "Beyond Weather", "Tomorrow.io", "Zeus AI"],
     techStack: ["Next.js", "MapLibre GL", "Recharts", "TypeScript", "Tailwind CSS", "Open-Meteo API"],
     dataSources: ["Open-Meteo Forecast API", "Open-Meteo Archive API", "Geocoding API"],
